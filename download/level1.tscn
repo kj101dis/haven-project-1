@@ -1,0 +1,227 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://level.gd" id="1_level"]
+[ext_resource type="Script" path="res://player.gd" id="2_player"]
+[ext_resource type="Script" path="res://heart.gd" id="3_heart"]
+[ext_resource type="Script" path="res://hud.gd" id="4_hud"]
+[ext_resource type="Script" path="res://goal.gd" id="5_goal"]
+
+[sub_resource type="RectangleShape2D" id="shape_player"]
+size = Vector2(40, 60)
+
+[sub_resource type="RectangleShape2D" id="shape_heart1"]
+size = Vector2(36, 36)
+
+[sub_resource type="RectangleShape2D" id="shape_heart2"]
+size = Vector2(36, 36)
+
+[sub_resource type="RectangleShape2D" id="shape_goal"]
+size = Vector2(40, 80)
+
+[sub_resource type="RectangleShape2D" id="shape_p1"]
+size = Vector2(600, 40)
+
+[sub_resource type="RectangleShape2D" id="shape_p2"]
+size = Vector2(200, 30)
+
+[sub_resource type="RectangleShape2D" id="shape_p3"]
+size = Vector2(200, 30)
+
+[sub_resource type="RectangleShape2D" id="shape_p4"]
+size = Vector2(200, 30)
+
+[sub_resource type="RectangleShape2D" id="shape_p5"]
+size = Vector2(500, 40)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Ground1" type="StaticBody2D" parent="Platforms"]
+position = Vector2(0, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground1"]
+position = Vector2(300, 20)
+shape = SubResource("shape_p1")
+
+[node name="Color" type="ColorRect" parent="Platforms/Ground1"]
+offset_right = 600.0
+offset_bottom = 40.0
+color = Color(0.36, 0.25, 0.17, 1)
+
+[node name="Grass" type="ColorRect" parent="Platforms/Ground1"]
+offset_right = 600.0
+offset_bottom = 8.0
+color = Color(0.3, 0.75, 0.3, 1)
+
+[node name="Ground2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(720, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground2"]
+position = Vector2(100, 15)
+shape = SubResource("shape_p2")
+
+[node name="Color" type="ColorRect" parent="Platforms/Ground2"]
+offset_right = 200.0
+offset_bottom = 30.0
+color = Color(0.36, 0.25, 0.17, 1)
+
+[node name="Grass" type="ColorRect" parent="Platforms/Ground2"]
+offset_right = 200.0
+offset_bottom = 8.0
+color = Color(0.3, 0.75, 0.3, 1)
+
+[node name="Ground3" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1040, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground3"]
+position = Vector2(100, 15)
+shape = SubResource("shape_p3")
+
+[node name="Color" type="ColorRect" parent="Platforms/Ground3"]
+offset_right = 200.0
+offset_bottom = 30.0
+color = Color(0.36, 0.25, 0.17, 1)
+
+[node name="Grass" type="ColorRect" parent="Platforms/Ground3"]
+offset_right = 200.0
+offset_bottom = 8.0
+color = Color(0.3, 0.75, 0.3, 1)
+
+[node name="Ground4" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1360, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground4"]
+position = Vector2(100, 15)
+shape = SubResource("shape_p4")
+
+[node name="Color" type="ColorRect" parent="Platforms/Ground4"]
+offset_right = 200.0
+offset_bottom = 30.0
+color = Color(0.36, 0.25, 0.17, 1)
+
+[node name="Grass" type="ColorRect" parent="Platforms/Ground4"]
+offset_right = 200.0
+offset_bottom = 8.0
+color = Color(0.3, 0.75, 0.3, 1)
+
+[node name="Ground5" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1680, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Ground5"]
+position = Vector2(250, 20)
+shape = SubResource("shape_p5")
+
+[node name="Color" type="ColorRect" parent="Platforms/Ground5"]
+offset_right = 500.0
+offset_bottom = 40.0
+color = Color(0.36, 0.25, 0.17, 1)
+
+[node name="Grass" type="ColorRect" parent="Platforms/Ground5"]
+offset_right = 500.0
+offset_bottom = 8.0
+color = Color(0.3, 0.75, 0.3, 1)
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(100, 500)
+script = ExtResource("2_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("shape_player")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_bottom = 648
+position_smoothing_enabled = true
+
+[node name="Hearts" type="Node2D" parent="."]
+
+[node name="Heart" type="Area2D" parent="Hearts"]
+position = Vector2(820, 450)
+script = ExtResource("3_heart")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hearts/Heart"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hearts/Heart"]
+shape = SubResource("shape_heart1")
+
+[node name="Heart2" type="Area2D" parent="Hearts"]
+position = Vector2(1140, 390)
+script = ExtResource("3_heart")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hearts/Heart2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hearts/Heart2"]
+shape = SubResource("shape_heart2")
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(2050, 520)
+script = ExtResource("5_goal")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("shape_goal")
+
+[node name="Pole" type="ColorRect" parent="Goal"]
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 3.0
+offset_bottom = 40.0
+
+[node name="Flag" type="ColorRect" parent="Goal"]
+offset_left = 3.0
+offset_top = -40.0
+offset_right = 33.0
+offset_bottom = -18.0
+color = Color(1, 0.85, 0.1, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud")
+
+[node name="Box" type="HBoxContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -270.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 58.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="HeartsPanel" type="PanelContainer" parent="HUD/Box"]
+layout_mode = 2
+
+[node name="Row" type="HBoxContainer" parent="HUD/Box/HeartsPanel"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Box/HeartsPanel/Row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeartsLabel" type="Label" parent="HUD/Box/HeartsPanel/Row"]
+layout_mode = 2
+text = "x 0"
+
+[node name="LevelPanel" type="PanelContainer" parent="HUD/Box"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="HUD/Box/LevelPanel"]
+layout_mode = 2
+text = "Level 1"
